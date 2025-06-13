@@ -45,7 +45,7 @@ function Dashboard () {
                 segments={[]}
             />
             <h1 className={styles.title}>Dashboard</h1>
-            <section>
+            <section className={styles.sectionDashboard}>
                 <article className={styles.dashboardContent}>
                     <RadioButtons
                         disabled={isToogleActive}

@@ -1,6 +1,8 @@
-/* .layout {
-  background-image: url(../../assets/visuel_webconf.webp);
-} */
+.layout {
+  font-family: 'Open Sans', sans-serif;
+  font-family: 'Open Sans Light', sans-serif;
+  font-family: 'Open Sans Condensed', sans-serif;
+}
 
 /* .footer {
   background-color: white;
