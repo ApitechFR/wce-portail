@@ -7,8 +7,6 @@ import {
   headerFooterDisplayItem,
 } from '@codegouvfr/react-dsfr/Display';
 
-import '../../../OverrideCssApp.css'
-
 type errorObj = {
   message: string;
   error: { status: string; stack: string };
