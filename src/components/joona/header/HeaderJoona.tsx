@@ -64,6 +64,14 @@ function HeaderJoona({ authenticated }: headerProps) {
               quickAccessItems={[
                 {
                   buttonProps: {
+                    onClick: function noRefCheck(){},
+                    className: 'fr-btn--icon-right'
+                  },
+                  iconId: 'fr-icon-download-line',
+                  text: 'Documentation utilisateur'
+                },
+                {
+                  buttonProps: {
                     onClick: modal.open.bind(modal),
                     className: 'fr-btn fr-btn--icon-right'
                   },
@@ -77,7 +85,7 @@ function HeaderJoona({ authenticated }: headerProps) {
                   },
                   iconId: 'fr-icon-account-circle-fill',
                   text: 'Se déconnecter'
-                },
+                }
               ]}
               navigation={[
                 {
@@ -130,6 +138,14 @@ function HeaderJoona({ authenticated }: headerProps) {
             quickAccessItems={[
               {
                 buttonProps: {
+                  onClick: function noRefCheck(){},
+                  className: 'fr-btn--icon-right'
+                },
+                iconId: 'fr-icon-download-line',
+                text: 'Documentation utilisateur'
+              },
+              {
+                buttonProps: {
                   onClick: modal.open.bind(modal),
                   className: 'fr-btn--icon-right'
 
@@ -144,7 +160,7 @@ function HeaderJoona({ authenticated }: headerProps) {
                 },
                 iconId: 'fr-icon-account-circle-fill',
                 text: 'Connexion'
-              },
+              }
             ]}
             serviceTitle="Joona.fr"
           />
