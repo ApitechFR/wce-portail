@@ -253,21 +253,7 @@ function App() {
           >
             <Route
               index
-              element={
-                <HomeJoona
-                  roomName={roomName}
-                  setRoomName={setRoomName}
-                  setIsWhitelisted={setIsWhitelisted}
-                  isWhitelisted={isWhitelisted}
-                  email={email}
-                  setEmail={setEmail}
-                  sendEmail={sendEmail}
-                  joinConference={joinConference}
-                  authenticated={authenticated}
-                  conferenceNumber={conferenceNumber}
-                  participantNumber={participantsNumber}
-                />
-              }
+              element={<HomeJoona />}
             />
             <Route path="profile" element={<Profile />} />
             <Route path="dashboard" element={<Dashboard />} />

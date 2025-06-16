@@ -4,21 +4,16 @@ import Input from '@codegouvfr/react-dsfr/Input';
 import Button from '@codegouvfr/react-dsfr/Button';
 import ShuffleIcon from '@mui/icons-material/Shuffle';
 
-interface AuthModalProps {
-  roomName: string;
-  email: string;
-  isWhitelisted: boolean | null;
-  setEmail: (mail: string) => void;
-  sendEmail: (mail: string) => void;
-  setIsWhitelisted: (e: any) => void;
-  setRoomName: (e: any) => void;
-  joinConference: (e: any) => void;
-  authenticated: boolean | null;
-  conferenceNumber: number;
-  participantNumber: number;
-}
+import roomNameGenerator from '../../../utils/RandomNameGenerator';
 
-function HomeJoona(props: AuthModalProps) {
+function HomeJoona() {
+
+  const [roomName, setRoomName] = useState("");
+
+  function generateRoomName() {
+    setRoomName(roomNameGenerator());
+  }
+
   return (
     <div className={styles.homeContainer}>
       <div className={styles.firstContainer}>
@@ -28,16 +23,19 @@ function HomeJoona(props: AuthModalProps) {
             <Input
               label=""
               nativeInputProps={{
-                placeholder: 'Saisissez votre nom de conférence'
+                placeholder: 'Saisissez votre nom de conférence',
+                value: roomName,
+                onChange: (e) => setRoomName(e.target.value),
               }}
               style={{width: '100%'}}
             />
             <Button
               className={styles.plusButton}
-              // onClick={e => {
-              //   e.preventDefault();
-              //   verifyAndSetVAlue(generateRoomName());
-              // }}
+              onClick={e => {
+                e.preventDefault();
+                generateRoomName();
+                console.log("nom de conf généré", roomName)
+              }}
               type="button"
             >
               <ShuffleIcon />
