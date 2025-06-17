@@ -1,6 +1,12 @@
 .content {
-    margin: 20px 80px 100px;
-    width: 45%;
+    padding: 20px 80px 100px;
+    width: 100%;
+}
+
+.contentBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .titleBlock {
@@ -17,6 +23,20 @@
     padding: 0;
 }
 
-.titleBlock .adminTag {
-    padding: 0px 20px;
+.optionSection {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.toogleSwitchSection {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+}
+
+.toogleSwitchBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
