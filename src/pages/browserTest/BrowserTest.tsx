@@ -24,7 +24,7 @@ import api from '../../axios/axios';
 import CircularProgress from '@mui/material/CircularProgress';
 import { JitsiMeeting } from '@jitsi/react-sdk';
 import { useNavigate } from 'react-router-dom';
-import { Alert } from '@codegouvfr/react-dsfr/Alert';
+import { Alert } from '@apitechfr/react-dsapitech/Alert';
 
 export default function BrowserTest() {
   const [expanded, setExpanded] = React.useState<string | boolean>('');

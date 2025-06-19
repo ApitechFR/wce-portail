@@ -20,11 +20,11 @@ import Feedback from './pages/feedback/Feedback';
 import BrowserTest from './pages/browserTest/BrowserTest';
 import Jitsi_meet from './pages/Jitsi_meet/Jitsi_meet';
 import api from './axios/axios';
-import { Badge } from '@codegouvfr/react-dsfr/Badge';
+import { Badge } from '@apitechfr/react-dsapitech/Badge';
 import LoginCallback from './pages/login/LoginCallback';
 import LogoutCallback from './pages/login/LogoutCallback';
 import Error from './pages/Error/Error';
-import MuiDsfrThemeProvider from '@codegouvfr/react-dsfr/mui';
+import MuiDsfrThemeProvider from '@apitechfr/react-dsapitech/mui';
 import PlanDuSite from './pages/PlanDuSite/PlanDuSite';
 import jwtDecode from 'jwt-decode';
 

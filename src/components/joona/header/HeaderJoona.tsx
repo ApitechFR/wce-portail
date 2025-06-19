@@ -1,9 +1,9 @@
-import { Header } from '@codegouvfr/react-dsfr/Header';
+import { Header } from '@apitechfr/react-dsapitech/Header';
 import styles from './HeaderJoona.module.css';
 import '@gouvfr-lasuite/integration/dist/css/gaufre.css';
-import Button from '@codegouvfr/react-dsfr/Button';
-import { createModal } from '@codegouvfr/react-dsfr/Modal';
-import { useIsModalOpen } from '@codegouvfr/react-dsfr/Modal/useIsModalOpen';
+import Button from '@apitechfr/react-dsapitech/Button';
+import { createModal } from '@apitechfr/react-dsapitech/Modal';
+import { useIsModalOpen } from '@apitechfr/react-dsapitech/Modal/useIsModalOpen';
 import { useState } from 'react';
 import JitsiFrame from '../iframePopup/JitsiFrame';
 import WeboverlayFrame from '../iframePopup/WeboverlayFrame';

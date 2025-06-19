@@ -1,8 +1,8 @@
-import { createModal } from '@codegouvfr/react-dsfr/Modal';
-import { Button } from '@codegouvfr/react-dsfr/Button';
-import { Input } from '@codegouvfr/react-dsfr/Input';
-import { Checkbox } from '@codegouvfr/react-dsfr/Checkbox';
-import { Badge } from '@codegouvfr/react-dsfr/Badge';
+import { createModal } from '@apitechfr/react-dsapitech/Modal';
+import { Button } from '@apitechfr/react-dsapitech/Button';
+import { Input } from '@apitechfr/react-dsapitech/Input';
+import { Checkbox } from '@apitechfr/react-dsapitech/Checkbox';
+import { Badge } from '@apitechfr/react-dsapitech/Badge';
 import CalendarModalComponent from './CalendarModal';
 
 import { useState, useEffect } from 'react';

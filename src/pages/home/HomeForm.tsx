@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Input } from '@codegouvfr/react-dsfr/Input';
-import { Button } from '@codegouvfr/react-dsfr/Button';
-import { Badge } from '@codegouvfr/react-dsfr/Badge';
+import { Input } from '@apitechfr/react-dsapitech/Input';
+import { Button } from '@apitechfr/react-dsapitech/Button';
+import { Badge } from '@apitechfr/react-dsapitech/Badge';
 import styles from './Home.module.css';
 import AuthModal from './AuthModal';
-import { Accordion } from '@codegouvfr/react-dsfr/Accordion';
-import { Alert } from '@codegouvfr/react-dsfr/Alert';
+import { Accordion } from '@apitechfr/react-dsapitech/Accordion';
+import { Alert } from '@apitechfr/react-dsapitech/Alert';
 import MuiAlert from '@mui/material/Alert';
 import Snackbar, { SnackbarCloseReason } from '@mui/material/Snackbar';
 import ShuffleIcon from '@mui/icons-material/Shuffle';

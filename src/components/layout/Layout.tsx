@@ -6,7 +6,7 @@ import { Outlet } from 'react-router-dom';
 import {
   Display,
   headerFooterDisplayItem,
-} from '@codegouvfr/react-dsfr/Display';
+} from '@apitechfr/react-dsapitech/Display';
 
 type errorObj = {
   message: string;

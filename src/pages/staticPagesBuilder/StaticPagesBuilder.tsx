@@ -4,7 +4,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import styles from './StaticPagesBuilder.module.css';
 import slug from 'remark-slug';
 import rehypeRaw from 'rehype-raw';
-import { Accordion } from '@codegouvfr/react-dsfr/Accordion';
+import { Accordion } from '@apitechfr/react-dsapitech/Accordion';
 
 interface StaticPagesBuilderProps {
   contentTable: boolean;

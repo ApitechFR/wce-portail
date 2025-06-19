@@ -1,4 +1,4 @@
-import Input from '@codegouvfr/react-dsfr/Input';
+import Input from '@apitechfr/react-dsapitech/Input';
 import { Breadcrumb } from "@codegouvfr/react-dsfr/Breadcrumb";
 import { Tag } from "@codegouvfr/react-dsfr/Tag";
 

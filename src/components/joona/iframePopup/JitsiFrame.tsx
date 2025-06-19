@@ -1,4 +1,4 @@
-import Button from '@codegouvfr/react-dsfr/Button';
+import Button from '@apitechfr/react-dsapitech/Button';
 import styles from './Frame.module.css'
 // import { useNavigate } from 'react-router-dom';
 

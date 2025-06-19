@@ -1,5 +1,5 @@
 
-import { Header } from '@codegouvfr/react-dsfr/Header';
+import { Header } from '@apitechfr/react-dsapitech/Header';
 import { Gaufre } from '@gouvfr-lasuite/integration';
 import styles from './Header.module.css';
 import '@gouvfr-lasuite/integration/dist/css/gaufre.css';

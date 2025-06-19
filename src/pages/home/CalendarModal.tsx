@@ -1,9 +1,9 @@
 import React from 'react';
-import { createModal } from '@codegouvfr/react-dsfr/Modal';
-import { useIsModalOpen } from '@codegouvfr/react-dsfr/Modal/useIsModalOpen';
-import { Button } from '@codegouvfr/react-dsfr/Button';
+import { createModal } from '@apitechfr/react-dsapitech/Modal';
+import { useIsModalOpen } from '@apitechfr/react-dsapitech/Modal/useIsModalOpen';
+import { Button } from '@apitechfr/react-dsapitech/Button';
 import ICalLink from 'react-icalendar-link';
-import { Input } from '@codegouvfr/react-dsfr/Input';
+import { Input } from '@apitechfr/react-dsapitech/Input';
 import axios from 'axios';
 import styles from './Home.module.css';
 import Snackbar, { SnackbarCloseReason } from '@mui/material/Snackbar';

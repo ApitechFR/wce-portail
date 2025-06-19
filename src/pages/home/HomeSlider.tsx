@@ -1,5 +1,5 @@
 import { Fade } from 'react-slideshow-image';
-import { Alert } from '@codegouvfr/react-dsfr/Alert';
+import { Alert } from '@apitechfr/react-dsapitech/Alert';
 
 import 'react-slideshow-image/dist/styles.css';
 import styles from './Home.module.css';

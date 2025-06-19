@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import styles from './Feedback.module.css';
-import { Button } from '@codegouvfr/react-dsfr/Button';
-import { Input } from '@codegouvfr/react-dsfr/Input';
-import { Badge } from '@codegouvfr/react-dsfr/Badge';
+import { Button } from '@apitechfr/react-dsapitech/Button';
+import { Input } from '@apitechfr/react-dsapitech/Input';
+import { Badge } from '@apitechfr/react-dsapitech/Badge';
 import Rating from '@mui/material/Rating';
 import StarIcon from '@mui/icons-material/Star';
 import Radio from '@mui/material/Radio';

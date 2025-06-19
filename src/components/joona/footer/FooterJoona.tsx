@@ -1,4 +1,4 @@
-import { Footer, FooterProps } from '@codegouvfr/react-dsfr/Footer';
+import { Footer, FooterProps } from '@apitechfr/react-dsapitech/Footer';
 
 interface props {
   headerFooterDisplayItem: FooterProps.BottomItem;
@@ -17,11 +17,12 @@ function FooterJoona({ headerFooterDisplayItem, style }: props) {
         Retrouvez toutes les informations et démarches administratives nécessaires à la création, 
         à la gestion et au développement de votre entreprise.
         "
+      domains={[]}
       termsLinkProps={{
-        to: '#'
+        href: '#'
       }}
       websiteMapLinkProps={{
-        to: '#'
+        href: '#'
       }}
       bottomItems={[headerFooterDisplayItem]}
 
