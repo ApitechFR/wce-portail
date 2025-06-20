@@ -33,6 +33,8 @@ import Dashboard from './pages/joona/Dashboard/Dashboard';
 import LayoutJoona from './components/joona/layout/LayoutJoona';
 import HomeJoona from './pages/joona/home/HomeJoona';
 import JitsiMeet from './pages/joona/jitsi_meet/jitsi_meet';
+import { useKeycloak } from '@react-keycloak/web';
+import { setKeycloakToken } from './axios/axios';
 
 type errorObj = {
   message: string;
@@ -58,10 +60,11 @@ function App() {
   const [email, setEmail] = useState('');
   const [isWhitelisted, setIsWhitelisted] = useState<boolean | null>(null);
   const [authenticated, setAuthenticated] = useState<boolean | null>(null);
+  const { keycloak, initialized } = useKeycloak();
   const [conferenceNumber, setConferenceNumber] = useState(0);
   const [participantsNumber, setparticipantsNumber] = useState(0);
   const [msg, setMsg] = useState<ReactNode>(<></>);
-
+  const authModeActivated = import.meta.env.VITE_AUTH_MODE === 'keycloak';
   const appName = import.meta.env.VITE_APP_NAME;
 
   const sendEmail = (roomName: string) => {
@@ -124,6 +127,21 @@ function App() {
       setAuthenticated(false);
     }
   };
+
+  if (authModeActivated){
+    useEffect(() => {
+      if (initialized && !keycloak?.authenticated) {
+        keycloak.login();
+      }
+    }, [initialized, keycloak?.authenticated]);
+  
+    useEffect(() => {
+      if (keycloak?.token) {
+        setKeycloakToken(keycloak.token);
+        // localStorage.setItem('auth', keycloak.token);
+      }
+    }, [keycloak?.token]);
+  }
 
   useEffect(() => {
     verifyAccessToken();
@@ -237,6 +255,10 @@ function App() {
     return <></>;
   };
 
+  if (authModeActivated && (!initialized || !keycloak?.authenticated)) {
+    // TODO mettre en place un loader au lieu de ça
+    return <div>Chargement de l’authentification...</div>;
+  }
   return (
   <MuiDsfrThemeProvider>
     <Routes>
@@ -247,7 +269,7 @@ function App() {
             path="/"
             element={
               <LayoutJoona
-                authenticated={authenticated}
+                authenticated={keycloak?.authenticated}
                 setAuthenticated={setAuthenticated}
                 setError={setError}
               />

@@ -8,6 +8,7 @@ import { useState } from 'react';
 import JitsiFrame from '../iframePopup/JitsiFrame';
 import WeboverlayFrame from '../iframePopup/WeboverlayFrame';
 import VoxifyFrame from '../iframePopup/VoxifyFrame';
+import { useKeycloak } from '@react-keycloak/web';
 
 type errorObj = {
   message: string;
@@ -30,6 +31,7 @@ function openModal () {
 }
 
 function HeaderJoona({ authenticated }: headerProps) {
+  const { keycloak } = useKeycloak();
 
   const [isAuthenticated, setIsAuthenticated] = useState(true);
 
@@ -48,6 +50,10 @@ function HeaderJoona({ authenticated }: headerProps) {
       default:
         return null;
     }
+  };
+
+   const logOut = () => {
+    keycloak.logout();
   };
 
   return (
@@ -70,14 +76,15 @@ function HeaderJoona({ authenticated }: headerProps) {
                   iconId: 'fr-icon-information-line',
                   text: 'Informations'
                 },
-                {
+                authenticated
+                  ? {
                   buttonProps: {
-                    onClick: function noRefCheck(){},
+                    onClick: logOut,
                     className: 'fr-btn--icon-right'
                   },
                   iconId: 'fr-icon-account-circle-fill',
                   text: 'Se déconnecter'
-                },
+                } : null,
               ]}
               navigation={[
                 {
