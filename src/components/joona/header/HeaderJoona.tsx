@@ -64,6 +64,14 @@ function HeaderJoona({ authenticated }: headerProps) {
               quickAccessItems={[
                 {
                   buttonProps: {
+                    onClick: function noRefCheck(){},
+                    className: 'fr-btn--icon-right'
+                  },
+                  iconId: 'fr-icon-external-link-fill',
+                  text: 'Documentation utilisateur'
+                },
+                {
+                  buttonProps: {
                     onClick: modal.open.bind(modal),
                     className: 'fr-btn fr-btn--icon-right'
                   },

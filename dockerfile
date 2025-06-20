@@ -1,29 +1,21 @@
-# Use the official Node.js runtime as the base image
-FROM node:bookworm as build
+# Étape 1 : Image de base
+FROM node:bookworm
 
-# Set the working directory in the container
-WORKDIR .
+# Étape 2 : Définir le répertoire de travail
+WORKDIR /app
 
-# Copy package.json and package-lock.json to the working directory
+# Étape 3 : Copier les fichiers package.json et lock (si existant)
 COPY package*.json ./
 
-# Copy the entire application code to the container
+# Étape 5 : Copier le reste du projet
 COPY . .
 
-# Install dependencies
+# Étape 4 : Installer les dépendances
 RUN npm install --force
 
-# Build the React app for production
-RUN npm run build
 
-# Use Nginx as the production server
-FROM nginx:alpine
+# Étape 6 : Exposer le port utilisé par Vite
+EXPOSE 3000
 
-# Copy the built React app to Nginx's web server directory
-COPY --from=build ./dist /usr/share/nginx/html
-
-# Expose port 80 for the Nginx server
-EXPOSE 80
-
-# Start Nginx when the container runs
-CMD ["nginx", "-g", "daemon off;"]
+# Étape 7 : Lancer Vite en mode dev
+CMD ["npm", "run", "dev"]

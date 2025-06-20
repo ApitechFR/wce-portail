@@ -22,21 +22,28 @@ interface AuthModalProps {
 function HomeJoona(props: AuthModalProps) {
   const navigate = useNavigate();
   const inputRef = useRef<HTMLInputElement>(null);
-  const [isError, setIsError] = useState(false)
+  const [isError, setIsError] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
 
+  
   useEffect(() => {
-    if (props.roomName) {
-      setIsError(false)
-    }
-  }, [props.roomName])
-
+    setIsError(!isValidRoomName(props.roomName));
+  }, [])
+  
+  function isValidRoomName(name: string): boolean {
+    const regex = /^[a-zA-Z0-9]{8}$/;
+    console.log("test", regex)
+    // const regex = /^[a-zA-Z0-9]{5,}$/;
+    return regex.test(name);
+  }
 
   function onSubmit(e: FormEvent) {
     e.preventDefault();
-    if (!props.roomName) {
+    if (!props.roomName || !isValidRoomName(props.roomName)) {
       setIsError(true)
       return
     };
+    setIsError(false);
     props.setRoomName(props.roomName);
     navigate(`/${props.roomName}`);
   }
@@ -58,12 +65,22 @@ function HomeJoona(props: AuthModalProps) {
             <Input
               label=""
               id="conferenceName"
+              state={isError && isFocused ? 'error' : 'default'}
               nativeInputProps={{
                 placeholder: 'Saisissez votre nom de conférence',
                 value: props.roomName,
-                onChange: (e) => props.setRoomName(e.currentTarget.value),
+                onChange: (e) => {
+                  const value = e.currentTarget.value;
+                  props.setRoomName(value);
+                  setIsError(!isValidRoomName(value));
+                },
+                onFocus: () => setIsFocused(true),
+                onBlur: () => setIsFocused(false),
                 ref: inputRef,
               }}
+              stateRelatedMessage={
+                isError && isFocused && 'Le nom de la conférence doit contenir au moins 5 caractères alphanumériques.'
+              }
               style={{ width: '100%' }}
             />
             <Button
@@ -80,7 +97,7 @@ function HomeJoona(props: AuthModalProps) {
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             <Button
-              // disabled
+              disabled={isError || !props.roomName}
               onClick={(e) => onSubmit(e)}
               className={styles.joinButton}
             >
