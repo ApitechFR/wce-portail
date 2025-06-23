@@ -8,6 +8,7 @@ import { useState } from 'react';
 import JitsiFrame from '../iframePopup/JitsiFrame';
 import WeboverlayFrame from '../iframePopup/WeboverlayFrame';
 import VoxifyFrame from '../iframePopup/VoxifyFrame';
+import docUtilisateur from '/doc/Documentation utilisateur Visio By Apitech.pdf'
 
 type errorObj = {
   message: string;
@@ -37,6 +38,10 @@ function HeaderJoona({ authenticated }: headerProps) {
 
   const [modalContent, setModalContent] = useState("jitsi");
 
+  const openPdf = () => {
+    window.open(docUtilisateur, '_blank', 'noopener,noreferrer');
+  }
+
   const renderModalContent = () => {
     switch (modalContent) {
       case "jitsi":
@@ -64,7 +69,7 @@ function HeaderJoona({ authenticated }: headerProps) {
               quickAccessItems={[
                 {
                   buttonProps: {
-                    onClick: function noRefCheck(){},
+                    onClick: openPdf,
                     className: 'fr-btn--icon-right'
                   },
                   iconId: 'fr-icon-external-link-fill',
