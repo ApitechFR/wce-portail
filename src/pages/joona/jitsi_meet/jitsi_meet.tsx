@@ -163,6 +163,68 @@ export default function JitsiMeet() {
     };
     //----------------------------------------------------------
 
+    const enableJibriApitechApi = import.meta.env.VITE_ENABLE_JIBRI_APITECH_API;
+    const jibriApitechApiDomain = import.meta.env.VITE_JIBRI_APITECH_API_DOMAIN;
+
+    //jitsiAPIOptions ???
+    const jitsiAPIOptions = {
+        eventId: '12345',
+        roomName: roomName ?? '',
+        uploadCallbackJwt: 'jwt',
+        uploadCallbackUrl: 'https://api',
+        uploadCallbackDomainUrl: 'https://api',
+    };
+
+    const handlejibriApitechApi = () => {
+        console.log(`enableJibriApitechApi=${enableJibriApitechApi}`);
+        console.log(`jibriApitechApiDomain=${jibriApitechApiDomain}`);
+
+        if (
+            enableJibriApitechApi &&
+            enableJibriApitechApi !== "process.env.ENABLE_JIBRI_APITECH_API" &&
+            jibriApitechApiDomain &&
+            jibriApitechApiDomain !== "process.env.JIBRI_APITECH_API_DOMAIN"
+        ) {
+            const {
+                eventId,
+                roomName,
+                uploadCallbackJwt,
+                uploadCallbackUrl,
+                uploadCallbackDomainUrl,
+            } = jitsiAPIOptions;
+
+            if (!eventId || !roomName || !uploadCallbackJwt) {
+                console.warn("Certains paramètres pour register_eventid sont manquants.");
+                return;
+            }
+
+            const jibriUrl = `${jibriApitechApiDomain}/visioreplay/register_eventid/${roomName}?eventid=${eventId}&jwt=${uploadCallbackJwt}&uploadcallbackdomainurl=${uploadCallbackDomainUrl}&uploadcallbackurl=${uploadCallbackUrl}`;
+
+            // const xmlHttp = new XMLHttpRequest();
+            // xmlHttp.onreadystatechange = function () {
+            //     if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+            //         console.log("Jibri API Response:", xmlHttp.responseText);
+            //     }
+            // };
+            // xmlHttp.open("GET", jibriUrl, true);
+            // xmlHttp.send(null);
+
+            fetch(jibriUrl)
+                .then((res) => {
+                    if (!res.ok) {
+                        throw new Error(`HTTP error! Status: ${res.status}`);
+                    }
+                    return res.text();
+                })
+                .then((text) => {
+                    console.log("Jibri API Response:", text);
+                })
+                .catch((err) => {
+                    console.error("Erreur API Jibri :", err);
+                });
+        }
+    };
+
     return (
         <>
             {/* <Feedback
@@ -179,6 +241,36 @@ export default function JitsiMeet() {
                 getIFrameRef={handleJitsiIFrameRef1}
                 onApiReady={externalApi => {
                     handleRecordingStatus(externalApi);
+                    handlejibriApitechApi();
+
+                    //-------------------------------------------------------------------
+                    const numberOfParticipants = externalApi.getNumberOfParticipants();
+                    console.log({ numberOfParticipants });
+
+                    externalApi.on('participantJoined', async () => {
+                        const participants = externalApi.getParticipantsInfo();
+                        console.log("Participant rejoint :", participants);
+                    });
+
+                    externalApi.on('participantLeft', async () => {
+                        const participants = externalApi.getParticipantsInfo();
+                        console.log("Participant quitté :", participants);
+                    });
+
+                    externalApi.on('videoConferenceJoined', () => {
+                        const start = Date.now();
+                        console.log("Conférence rejointe à :", new Date(start).toLocaleTimeString());
+
+                        const interval = setInterval(() => {
+                            const duration = Math.floor((Date.now() - start) / 1000);
+                            console.log(`Durée de la conférence : ${duration} sec`);
+                        }, 10000);
+
+                        externalApi.on('videoConferenceLeft', () => {
+                            clearInterval(interval);
+                        });
+                    });
+                    //------------------------------------------------------------------------------------
                 }}
                 onReadyToClose={onClose}
             />
