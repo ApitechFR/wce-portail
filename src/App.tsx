@@ -32,7 +32,7 @@ import Profile from './pages/joona/Profile/Profile';
 import Dashboard from './pages/joona/Dashboard/Dashboard';
 import LayoutJoona from './components/joona/layout/LayoutJoona';
 import HomeJoona from './pages/joona/home/HomeJoona';
-import Admin from './pages/joona/Administration/Admin';
+import Admin from './pages/joona/Admin/Admin';
 
 type errorObj = {
   message: string;

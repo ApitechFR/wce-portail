@@ -28,20 +28,21 @@ function Admin () {
 
     const formatOffset = (timeZone: string): string => {
         try {
-        const date = new Date();
-        const options: Intl.DateTimeFormatOptions = {
-            timeZone,
-            hour12: false,
-            hour: '2-digit',
-            minute: '2-digit',
-            timeZoneName: 'short',
-        };
-        const formatter = new Intl.DateTimeFormat('en-US', options);
-        const parts = formatter.formatToParts(date);
-        const offset = parts.find(p => p.type === 'timeZoneName')?.value || '';
-        return offset.replace('GMT', 'UTC');
+            const date = new Date();
+            const options: Intl.DateTimeFormatOptions = {
+                timeZone,
+                hour12: false,
+                hour: '2-digit',
+                minute: '2-digit',
+                timeZoneName: 'short',
+            };
+            const formatter = new Intl.DateTimeFormat('en-US', options);
+            const parts = formatter.formatToParts(date);
+            const offset = parts.find(p => p.type === 'timeZoneName')?.value || '';
+
+            return offset.replace('GMT', 'UTC');
         } catch {
-        return '';
+            return '';
         }
     };
 
@@ -58,37 +59,27 @@ function Admin () {
                 <h1>Administration</h1>
             </div>
             <div className={styles.contentBlock}>
-                <Input
-                    disabled
-                    label='Nom'
-                />
-
-                {/* <Select
-                    label="Fuseau horaire"
-                    nativeSelectProps={{
-                        name: "my-select"
-                    }}
-                >
-                    <option value="" selected disabled hidden>Selectionnez une option</option>
-                    <option value="1">Option 1</option>
-                    <option value="2">Option 2</option>
-                    <option value="3">Option 3</option>
-                    <option value="4">Option 4</option>
-                </Select> */}
-                <Select
-                    label="Fuseau horaire"
-                    nativeSelectProps={{
-                        name: "timezone",
-                    }}
-                >
-                    <option value="" disabled hidden>Sélectionnez un fuseau horaire</option>
-                    {timeZones.map(tz => (
-                        <option key={tz} value={tz}>
-                        {`${tz} (${formatOffset(tz)})`}
-                        </option>
-                    ))}
-                </Select>
-
+                <div className={styles.inputStyle}>
+                    <Input
+                        disabled
+                        label='Titre du header'
+                    />
+                </div>
+                <div className={styles.inputStyle}>
+                    <Select
+                        label="Fuseau horaire"
+                        nativeSelectProps={{
+                            name: "timezone",
+                        }}
+                    >
+                        <option value="" disabled hidden>Sélectionnez un fuseau horaire</option>
+                        {timeZones.map(tz => (
+                            <option key={tz} value={tz}>
+                            {`${tz} (${formatOffset(tz)})`}
+                            </option>
+                        ))}
+                    </Select>
+                </div>
                 <Upload
                     hint="Ajoutez ou modifier le logo header"
                     state="default"
