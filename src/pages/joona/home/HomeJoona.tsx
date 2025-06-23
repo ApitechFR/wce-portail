@@ -4,6 +4,7 @@ import Input from '@codegouvfr/react-dsfr/Input';
 import Button from '@codegouvfr/react-dsfr/Button';
 import ShuffleIcon from '@mui/icons-material/Shuffle';
 import { useNavigate } from 'react-router-dom';
+import RandExp from 'randexp';
 
 interface AuthModalProps {
   roomName: string;
@@ -29,12 +30,12 @@ function HomeJoona(props: AuthModalProps) {
   useEffect(() => {
     setIsError(!isValidRoomName(props.roomName));
   }, [])
-  
+
+  const regexPattern = import.meta.env.VITE_CONFERENCE_NAME_REGEX ?? '^[A-Z0-9]{8}$';
+  const regexName = new RegExp(regexPattern);
+
   function isValidRoomName(name: string): boolean {
-    const regex = /^[a-zA-Z0-9]{8}$/;
-    console.log("test", regex)
-    // const regex = /^[a-zA-Z0-9]{5,}$/;
-    return regex.test(name);
+    return regexName.test(name);
   }
 
   function onSubmit(e: FormEvent) {
@@ -49,12 +50,9 @@ function HomeJoona(props: AuthModalProps) {
   }
 
   function generateRoomName() {
-    return props.setRoomName(
-      Math.random().toString(36).slice(2).toUpperCase() +
-      Math.floor(Math.random() * 10) +
-      Math.floor(Math.random() * 10) +
-      Math.floor(Math.random() * 10)
-    );
+    const name = new RandExp(regexName).gen();
+    console.log({regexName});
+    return name;
   }
   return (
     <div className={styles.homeContainer}>
@@ -79,17 +77,18 @@ function HomeJoona(props: AuthModalProps) {
                 ref: inputRef,
               }}
               stateRelatedMessage={
-                isError && isFocused && 'Le nom de la conférence doit contenir au moins 5 caractères alphanumériques.'
+                isError && isFocused && import.meta.env.VITE_CONFERENCE_NAME_REGEX_MESSAGE
               }
               style={{ width: '100%' }}
             />
             <Button
               className={styles.plusButton}
-              onClick={generateRoomName}
-              // onClick={e => {
-              //   e.preventDefault();
-              //   verifyAndSetVAlue(generateRoomName());
-              // }}
+              // onClick={generateRoomName}
+              onClick={() => {
+                const newName = generateRoomName();
+                props.setRoomName(newName);
+                setIsError(!isValidRoomName(newName));
+              }}
               type="button"
             >
               <ShuffleIcon />
@@ -97,7 +96,8 @@ function HomeJoona(props: AuthModalProps) {
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             <Button
-              disabled={isError || !props.roomName}
+              // disabled={isError || !props.roomName}
+              disabled={!isValidRoomName(props.roomName)}
               onClick={(e) => onSubmit(e)}
               className={styles.joinButton}
             >
