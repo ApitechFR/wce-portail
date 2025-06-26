@@ -7,6 +7,7 @@ import { Card } from "@codegouvfr/react-dsfr/Card";
 import { useEffect, useState } from 'react';
 
 import cardsData from '../../../data/cardConfig.json';
+import Button from '@codegouvfr/react-dsfr/Button';
 
 function Dashboard () {
 
@@ -86,10 +87,9 @@ function Dashboard () {
                                     <Card
                                         background
                                         border
-                                        desc="Plage donnée"
+                                        desc={card.description}
                                         size="medium"
                                         title={card.valeur}
-                                        detail={card.description}
                                         titleAs="h2"
                                         className={styles.cardStyle}
                                         key={card.key}
@@ -122,6 +122,13 @@ function Dashboard () {
                                         type: 'date'
                                     }}
                                 />
+                            </div>
+                            <div className={styles.validButton}>
+                                <Button
+                                    onClick={function noRefCheck(){}}
+                                >
+                                    <span>Valider</span>
+                                </Button>
                             </div>
                         </div>
                     )}

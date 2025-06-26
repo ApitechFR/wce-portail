@@ -45,3 +45,35 @@
     margin-bottom: 20px;
 }
 
+.validButton {
+    display: flex;
+    justify-content: flex-end;
+    margin: 20px 0;
+}
+
+@media (max-width: 900px) {
+    .sectionDashboard {
+        flex-direction: column-reverse;
+        gap: 10px;
+    }
+
+    .periodBlock {
+        width: 100%;
+    }
+
+    .cardsSection {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .cardStyle {
+        flex: 1 1 calc(33.333% - 1rem);
+        box-sizing: border-box;
+    }
+
+    .content {
+        margin: 20px 40px 100px;
+    }
+}
+
