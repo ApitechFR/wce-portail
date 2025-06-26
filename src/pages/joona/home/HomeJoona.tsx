@@ -1,4 +1,4 @@
-import { useState, MouseEventHandler, MouseEvent, useRef, useEffect, FormEvent } from 'react';
+import { useState, useRef, FormEvent } from 'react';
 import styles from './HomeJoona.module.css';
 import Input from '@codegouvfr/react-dsfr/Input';
 import Button from '@codegouvfr/react-dsfr/Button';
@@ -24,14 +24,9 @@ function HomeJoona(props: AuthModalProps) {
   const navigate = useNavigate();
   const inputRef = useRef<HTMLInputElement>(null);
   const [isError, setIsError] = useState(false);
-  const [isFocused, setIsFocused] = useState(false);
 
-  
-  useEffect(() => {
-    setIsError(!isValidRoomName(props.roomName));
-  }, [])
-
-  const regexPattern = import.meta.env.VITE_CONFERENCE_NAME_REGEX ?? '^[A-Z0-9]{8}$';
+  const regexEnv = import.meta.env.VITE_CONFERENCE_NAME_REGEX;
+  const regexPattern = regexEnv ?? '^[A-Z0-9]{8}$';
   const regexName = new RegExp(regexPattern);
 
   function isValidRoomName(name: string): boolean {
@@ -51,9 +46,9 @@ function HomeJoona(props: AuthModalProps) {
 
   function generateRoomName() {
     const name = new RandExp(regexName).gen();
-    console.log({regexName});
     return name;
   }
+
   return (
     <div className={styles.homeContainer}>
       <div className={styles.firstContainer}>
@@ -63,7 +58,7 @@ function HomeJoona(props: AuthModalProps) {
             <Input
               label=""
               id="conferenceName"
-              state={isError && isFocused ? 'error' : 'default'}
+              state={isError ? 'error' : 'default'}
               nativeInputProps={{
                 placeholder: 'Saisissez votre nom de conférence',
                 value: props.roomName,
@@ -72,18 +67,15 @@ function HomeJoona(props: AuthModalProps) {
                   props.setRoomName(value);
                   setIsError(!isValidRoomName(value));
                 },
-                onFocus: () => setIsFocused(true),
-                onBlur: () => setIsFocused(false),
                 ref: inputRef,
               }}
               stateRelatedMessage={
-                isError && isFocused && import.meta.env.VITE_CONFERENCE_NAME_REGEX_MESSAGE
+                isError && import.meta.env.VITE_CONFERENCE_NAME_REGEX_MESSAGE
               }
               style={{ width: '100%' }}
             />
             <Button
               className={styles.plusButton}
-              // onClick={generateRoomName}
               onClick={() => {
                 const newName = generateRoomName();
                 props.setRoomName(newName);
@@ -96,7 +88,6 @@ function HomeJoona(props: AuthModalProps) {
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             <Button
-              // disabled={isError || !props.roomName}
               disabled={!isValidRoomName(props.roomName)}
               onClick={(e) => onSubmit(e)}
               className={styles.joinButton}
