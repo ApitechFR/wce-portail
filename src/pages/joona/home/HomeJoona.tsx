@@ -53,8 +53,8 @@ function HomeJoona(props: AuthModalProps) {
     <div className={styles.homeContainer}>
       <div className={styles.firstContainer}>
         <h1 className={styles.homeTitle}>Rejoindre une visio conférence</h1>
-        <div style={{ width: '70%', margin: 'auto' }}>
-          <div style={{ display: 'flex', width: '100%' }}>
+        <div className={styles.inputsRoom}>
+          <div className={styles.joinPart}>
             <Input
               label=""
               id="conferenceName"
@@ -86,7 +86,7 @@ function HomeJoona(props: AuthModalProps) {
               <ShuffleIcon />
             </Button>
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          <div className={styles.buttonsPart}>
             <Button
               disabled={!isValidRoomName(props.roomName)}
               onClick={(e) => onSubmit(e)}
@@ -114,7 +114,7 @@ function HomeJoona(props: AuthModalProps) {
         </div>
       </div>
       <div className={styles.secondContainer}>
-        <img src="" alt="test" />
+        <img src="src\assets\illustration homepage visio by apitech.svg" alt="homepage side image" />
       </div>
     </div>
   );
