@@ -1,0 +1,21 @@
+.content {
+    margin: 40px 120px 100px;
+    /* width: 100%; */
+}
+
+.title {
+    margin-bottom: 40px;
+    font-size: 2.0em;
+}
+
+.contentFeedback {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    /* width: 100%; */
+}
+
+.validButtonFeedback {
+    display: flex;
+    justify-content: flex-end;
+}
